@@ -2,7 +2,11 @@
 #export ZSH=/Users/qr4/.oh-my-zsh
 #Path to your oh-my-zsh configuration.
 #zmodload zsh/zprof
-ZSH=$HOME/.oh-my-zsh
+
+include () {
+    [[ -f "$1" ]] && source "$1"
+}
+
 
 export DYLD_FORCE_FLAT_NAMESPACE=1
 
@@ -48,8 +52,12 @@ plugins=(
   zsh-autosuggestions
 )
 
-source $ZSH/oh-my-zsh.sh
-source ~/.shell_prompt.sh
+[[ -d $HOME/.oh-my-zsh ]] && ZSH=$HOME/.oh-my-zsh
+[[ -d /usr/share/oh-my-zsh ]] && ZSH=/usr/share/oh-my-zsh
+
+include $HOME/.oh-my-zsh/oh-my-zsh.sh
+include /usr/share/oh-my-zsh/oh-my-zsh.sh
+include ~/.shell_prompt.sh
 
 # Customize to your needs...
 
@@ -281,7 +289,9 @@ p() {
 export PATH="$HOME/.yarn/bin:$PATH"
 export PATH="/usr/local/sbin:$PATH"
 
-source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-#zprof
 
-[[ -f ~/zsh_private ]] && source ~/zsh_private
+include ~/zsh_private
+include /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+include /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+#zprof

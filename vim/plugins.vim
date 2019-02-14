@@ -86,3 +86,9 @@ Plugin 'Raimondi/delimitMate'
 
 " multiple cursors a la sublime
 Plugin 'terryma/vim-multiple-cursors'
+
+" vim like navigation in tmux
+Plugin 'christoomey/vim-tmux-navigator'
+
+" tmux airline
+Plugin 'edkolev/tmuxline.vim'
