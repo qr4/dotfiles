@@ -1,0 +1,17 @@
+- defaults:
+    link:
+      relink: true
+
+- clean: ['~']
+
+- link:
+    ~/.tmux:
+    ~/.tmux.conf:
+    ~/.vim:
+    ~/.vimrc:
+    ~/.zshrc:
+    ~/.shell_prompt.sh:
+
+- shell:
+  -  git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+  -  ~/.vim/install.sh

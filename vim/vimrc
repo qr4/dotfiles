@@ -1,0 +1,348 @@
+runtime! archlinux.vim
+" Set 'nocompatible' to ward off unexpected things that your distro might
+" have made, as well as sanely reset options when re-sourcing .vimrc
+set nocompatible              " be iMproved
+filetype off                  " required!
+
+"------------------------------------------------------------
+" Vundle
+"------------------------------------------------------------
+  set rtp+=~/.vim/bundle/Vundle.vim/
+  call vundle#begin()
+
+  Plugin 'gmarik/Vundle.vim'
+
+  source ~/.vim/plugins.vim
+  call vundle#end()
+
+"------------------------------------------------------------
+" Searching
+"------------------------------------------------------------
+  " show matches while typing
+  set incsearch
+  " Use case insensitive search, except when using capital letters
+  set ignorecase
+  set smartcase
+
+  " Highlight searches
+  set hlsearch
+
+  "show search matches in the middle of the window
+  nnoremap n nzzzv
+  nnoremap N Nzzzv
+
+  " Ignore binart/build files when completing/searching
+  set wildignore+=*/build/*,*.so,*.swp,*.zip,*.o,.git/*,.hg/*,.svn/*,*.db
+
+"------------------------------------------------------------
+" Usability options
+"------------------------------------------------------------
+  " Attempt to determine the type of a file based on its name and possibly its
+  " contents.  Use this to allow intelligent auto-indenting for each filetype,
+  " and for plugins that are filetype specific.
+  " To ignore plugin indent changes, instead use:
+  " filetype plugin on
+  filetype plugin indent on
+
+  " Enable syntax highlighting
+  syntax enable
+
+  " enable utf8 encoding
+  set encoding=utf-8
+
+  " One of the most important options to activate. Allows you to switch from an
+  " unsaved buffer without saving it first. Also allows you to keep an undo
+  " history for multiple files. Vim will complain if you try to quit without
+  " saving, and swap files will keep you safe if your computer crashes.
+  set hidden
+
+  " normal clipboard
+  set clipboard=unnamedplus
+
+  "larger undo buffer
+  set history=1000
+  set undolevels=9999999
+
+  " set terminal title
+  set title
+
+  "type w!! if you forgot to sudo
+  cmap w!! w !sudo tee % >/dev/null
+
+  " improve the complete menu
+  set completeopt=menu,menuone,longest
+
+  " Better command-line completion
+  set wildmenu"
+
+  " Don't redraw while executing macros (good performance config)
+  set lazyredraw
+
+  " Do not try to display latex math as unicode
+  let g:tex_conceal = ""
+
+  " Show partial commands in the last line of the screen
+  set showcmd
+
+  " Set to auto read when a file is changed from the outside
+  set autoread
+
+  " Remove menu bars in gvim
+  if has('gui_running')
+    set guioptions = "agirLtm"
+  endif
+
+  " Modelines have historically been a source of security vulnerabilities.  As
+  " such, it may be a good idea to disable them and use the securemodelines
+  " script, <http://www.vim.org/scripts/script.php?script_id=1876>.
+  set nomodeline
+
+  " reload vimrc on F12
+  nnoremap <F12> :so ~/.vimrc <CR>
+
+  " do not wrap lines at the end of the screen
+  set nowrap
+
+  " show prettier line wraps (just in case)
+  set showbreak=↪
+
+  " remove menu-shortcuts using alt key
+  set winaltkeys=no
+
+  " show and remove trailing whitespaces
+  match ErrorMsg '\s\+$'
+
+  function! TrimWhiteSpace()
+    %s/\s\+$//e
+  endfunction
+
+  function! ConvertToUnixFileFormat()
+    %s/\r//g
+  endfunction
+
+  autocmd FileWritePre   * :call TrimWhiteSpace()
+  autocmd FileWritePre   * :call ConvertToUnixFileFormat()
+  autocmd FileAppendPre  * :call TrimWhiteSpace()
+  autocmd FilterWritePre * :call TrimWhiteSpace()
+  autocmd BufWritePre    * :call TrimWhiteSpace()
+
+  " Use visual bell instead of beeping when doing something wrong
+  set noerrorbells visualbell
+  autocmd GUIEnter * set visualbell t_vb=
+
+  " And reset the terminal code for the visual bell.  If visualbell is set, and
+  " this line is also included, vim will neither flash nor beep.  If visualbell
+  " is unset, this does nothing.
+  set vb
+  set t_vb=
+
+  " Allow backspacing over autoindent, line breaks and start of insert action
+  set backspace=indent,eol,start
+
+  " Stop certain movements from always going to the first character of a line.
+  " While this behaviour deviates from that of Vi, it does what most users
+  " coming from other editors would expect.
+  set nostartofline
+
+  " Display the cursor position on the last line of the screen or in the status
+  " line of a window
+  set ruler
+
+  " cursor
+  hi CursorLine term=bold,underline cterm=bold,underline ctermbg=NONE
+  hi CursorColumn term=bold cterm=bold ctermbg=NONE
+
+  " Change Color when entering Insert Mode
+  autocmd InsertEnter * set cursorline! cursorcolumn!
+
+  " Revert Color to default when leaving Insert Mode
+  autocmd InsertLeave * set cursorline! cursorcolumn!
+
+  " Always display the status line, even if only one window is displayed
+  set laststatus=2
+
+  " Instead of failing a command because of unsaved changes, instead raise a
+  " dialogue asking if you wish to save changed files.
+  set confirm
+
+  " Persistent undo
+  try
+    if MySys() == "windows"
+      set undodir=C:\Windows\Temp
+    else
+      set undodir=~/.vim/undo
+    endif
+    set undofile
+  catch
+  endtry
+
+  " return to normal mode on FocusLost
+  au FocusLost * call feedkeys("\<C-\>\<C-n>")
+
+  " Enable use of the mouse for all modes
+  " Do not enable mouse for all modes because this leads to problems with copy
+  " and paste.
+  set mouse=a
+
+  " Set the command window height to 2 lines, to avoid many cases of having to
+  " "press <Enter> to continue"
+  set cmdheight=3
+
+  " Display line numbers on the left
+  set number
+  " Up to 99999 lines
+  set numberwidth=5
+
+  " Quickly time out on keycodes, but never time out on mappings
+  set notimeout ttimeout ttimeoutlen=1
+
+  " Use <F2> to toggle between 'paste' and 'nopaste'
+  set pastetoggle=<F2>
+
+  " Set my favorite colorscheme
+  " Also enable this colorscheme in the shell
+  set t_Co=256
+  if has("gui_running")
+    set guifont=DejaVuSansMono\ for\ Powerline
+  endif
+  colorscheme molokai
+  "let g:molokai_original=1
+
+"------------------------------------------------------------
+" Indentation options
+"------------------------------------------------------------
+
+  set tabstop=8
+  set expandtab
+  set shiftwidth=2 " for indentation
+  set softtabstop=2
+
+  " When opening a new line and no filetype-specific indenting is enabled, keep
+  " the same indent as the line you're currently on. Useful for READMEs, etc.
+  set autoindent
+
+  " copy previous indentation
+  set copyindent
+
+  " set smart indent
+  set smartindent
+
+  " Show whitespaces
+  syn match TAB "\t"
+  hi link TAB Error
+
+  " we do what to show tabs, to ensure we get them out of my files
+  set list
+  "set linebreak
+  "set nolist
+
+  " show tabs and trailing whitespace
+  set listchars=tab:└─,trail:-,extends:>,precedes:<,nbsp:&
+
+  " how many tenths of a second to blink matching brackets
+  set matchtime=5
+
+  " Keep 5 lines (top/bottom) for scope
+  set scrolloff=10
+
+  " show matching brackets
+  set showmatch
+
+  " Save swapfiles in tmp instead of working dir (just in case)
+  set directory=/tmp
+
+  " Do not use swap files
+  set noswapfile
+
+  " always switch to the current directory of the file you are
+  set autochdir
+
+  " show a line at column 100 (code style)
+  set colorcolumn=100
+
+"------------------------------------------------------------
+" Mappings
+" Useful mappings
+"------------------------------------------------------------
+
+  " Map Y to act like D and C, i.e. to yank until EOL, rather than act as yy,
+  " which is the default
+  map Y y$
+
+  " Map <C-L> (redraw screen) to also turn off search highlighting until the
+  " next search
+  nmap <M-l> :nohl<CR>
+
+  " remove Ex mode
+  nnoremap Q <nop>
+
+  " normal copy/paste
+  map <C-c> "+y
+  vmap <C-c> "+y
+
+  map <C-x> "+d
+  vmap <C-x> "+d
+
+  map <C-v> "+gP
+  vmap <C-v> "+gP
+  imap <C-v> <ESC>"+gpa
+
+  " I always like to save with ctrl-s
+  map <C-S> :w<CR>
+  " map! <C-S> <ESC>:w<CR>li
+  vmap <C-S> <ESC>:w<CR>v
+  imap <C-S> <ESC>:w<CR>a
+
+  " Prevent replace mode
+  imap <Insert> <Nop>
+
+  " Navigate in word wrapped text with the usual navigation keys and with the up
+  " and down keys
+  nnoremap k gk
+  nnoremap j gj
+  nmap <Up> gk
+  nmap <Down> gj
+
+  " Smart way to move between windows
+  map <C-j> <C-W>j
+  map <C-k> <C-W>k
+  map <C-h> <C-W>h
+  map <C-l> <C-W>l
+
+  " Shortcuts for moving between tabs (taken from www.swaroopch.com)
+  " Alt-j to move to the tab on the left
+  nmap <M-j> gT
+  " Alt-k to move to the tab on the right
+  nmap <M-k> gt
+
+  " I always write W instead of w and Q instead of Q
+  command WQ wq
+  command W w
+  command Q q
+
+  " Insert timestamp
+  nnoremap <F5> "=strftime("%A, %d %B %Y %H:%M %Z")<C-M>p
+
+  " Hex
+  nnoremap <F8> :call HexMe()<CR>
+
+  let $in_hex=0
+  function HexMe()
+    set binary
+    set noeol
+    if $in_hex>0
+      :%!xxd -r
+      let $in_hex=0
+    else
+      :%!xxd
+      let $in_hex=1
+    endif
+  endfunction
+
+"------------------------------------------------------------
+" Plugin configs
+"------------------------------------------------------------
+  source ~/.vim/plugins_config.vim
+
+" Define mapleader \ at the end of the file for all the plugins that use a leader key
+let mapleader = "\\"
