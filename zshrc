@@ -113,9 +113,9 @@ alias gl="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %
 alias gp='git push origin HEAD:refs/for/master'
 alias gpl='git push origin HEAD:refs/for/master | tee /dev/stderr |  grep -o "https:.*" | cut -d" " -f1 | pbcopy'
 
-# cleanup docker
-alias docker_cleanup="docker rm -v $(docker ps --filter status=exited -q) && docker rmi $(docker images --filter dangling=true -q)"
-
+docker_cleanup() {
+  docker rm -v $(docker ps --filter status=exited -q) && docker rmi $(docker images --filter dangling=true -q)
+}
 #
 # Uncompresses raw zlib compressed data.
 #
