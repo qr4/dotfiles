@@ -293,5 +293,6 @@ export PATH="/usr/local/sbin:$PATH"
 include ~/zsh_private
 include /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 include /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+include /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 #zprof
