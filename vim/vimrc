@@ -57,7 +57,7 @@ filetype off                  " required!
   set hidden
 
   " normal clipboard
-  set clipboard=unnamedplus
+  set clipboard=unnamed
 
   "larger undo buffer
   set history=1000
@@ -186,7 +186,7 @@ filetype off                  " required!
 
   " Set the command window height to 2 lines, to avoid many cases of having to
   " "press <Enter> to continue"
-  set cmdheight=3
+  set cmdheight=1
 
   " Display line numbers on the left
   set number
@@ -304,10 +304,10 @@ filetype off                  " required!
   nmap <Down> gj
 
   " Smart way to move between windows
-  map <C-j> <C-W>j
-  map <C-k> <C-W>k
-  map <C-h> <C-W>h
-  map <C-l> <C-W>l
+""  map <C-j> <C-W>j
+""  map <C-k> <C-W>k
+""  map <C-h> <C-W>h
+""  map <C-l> <C-W>l
 
   " Shortcuts for moving between tabs (taken from www.swaroopch.com)
   " Alt-j to move to the tab on the left

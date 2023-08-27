@@ -11,10 +11,10 @@ Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/syntastic'
 
 " YouComleteMe - a fuzzy autocompletion
-Plugin 'Valloric/YouCompleteMe'
+" Plugin 'Valloric/YouCompleteMe'
 
 " easy-motion - allows for better/easier navigation: \\s
-Plugin 'Lokaltog/vim-easymotion'
+"Plugin 'Lokaltog/vim-easymotion'
 
 " NERDtree file manager
 Plugin 'scrooloose/nerdtree'
@@ -38,7 +38,9 @@ Plugin 'octol/vim-cpp-enhanced-highlight'
 Plugin 'Lokaltog/powerline-fonts'
 
 " airline - simple tab/statusline plugin
-Plugin 'bling/vim-airline'
+"Plugin 'bling/vim-airline'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 
 " git signs on the left
 Plugin 'airblade/vim-gitgutter'
@@ -75,8 +77,8 @@ Plugin 'kien/ctrlp.vim'
 Plugin 'DoxygenToolkit.vim'
 
 " snippets
-Plugin 'honza/vim-snippets'
-Plugin 'SirVer/ultisnips'
+"Plugin 'honza/vim-snippets'
+"Plugin 'SirVer/ultisnips'
 
 " fixes terminals (allows alt modifiers etc...)
 Plugin 'drmikehenry/vim-fixkey'
@@ -85,10 +87,10 @@ Plugin 'drmikehenry/vim-fixkey'
 Plugin 'Raimondi/delimitMate'
 
 " multiple cursors a la sublime
-Plugin 'terryma/vim-multiple-cursors'
+" Plugin 'terryma/vim-multiple-cursors'
 
 " vim like navigation in tmux
-Plugin 'christoomey/vim-tmux-navigator'
+"Plugin 'christoomey/vim-tmux-navigator'
 
 " tmux airline
 Plugin 'edkolev/tmuxline.vim'

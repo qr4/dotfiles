@@ -1,38 +1,78 @@
+# zmodload zsh/zprof
+# If you come from bash you might have to change your $PATH.
+# export PATH=$HOME/bin:/usr/local/bin:$PATH
+
 # Path to your oh-my-zsh installation.
-#export ZSH=/Users/qr4/.oh-my-zsh
-#Path to your oh-my-zsh configuration.
-#zmodload zsh/zprof
+export ZSH=$HOME/.oh-my-zsh
 
-include () {
-    [[ -f "$1" ]] && source "$1"
-}
-
-
-export DYLD_FORCE_FLAT_NAMESPACE=1
-
-# Set name of the theme to load.
-# Look in ~/.oh-my-zsh/themes/
+# Set name of the theme to load --- if set to "random", it will
+# load a random theme each time oh-my-zsh is loaded, in which case,
+# to know which specific one was loaded, run: echo $RANDOM_THEME
+# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="gnzh"
 
-# Set to this to use case-sensitive completion
+# Set list of themes to pick from when loading at random
+# Setting this variable when ZSH_THEME=random will cause zsh to load
+# a theme from this variable instead of looking in $ZSH/themes/
+# If set to an empty array, this variable will have no effect.
+# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
+
+# Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
 
-# Comment this out to disable weekly auto-update checks
-# DISABLE_AUTO_UPDATE="true"
+# Uncomment the following line to use hyphen-insensitive completion.
+# Case-sensitive completion must be off. _ and - will be interchangeable.
+# HYPHEN_INSENSITIVE="true"
 
-# Uncomment following line if you want to disable autosetting terminal title.
+# Uncomment one of the following lines to change the auto-update behavior
+# zstyle ':omz:update' mode disabled  # disable automatic updates
+# zstyle ':omz:update' mode auto      # update automatically without asking
+# zstyle ':omz:update' mode reminder  # just remind me to update when it's time
+
+# Uncomment the following line to change how often to auto-update (in days).
+# zstyle ':omz:update' frequency 13
+
+# Uncomment the following line if pasting URLs and other text is messed up.
+# DISABLE_MAGIC_FUNCTIONS="true"
+
+# Uncomment the following line to disable colors in ls.
+# DISABLE_LS_COLORS="true"
+
+# Uncomment the following line to disable auto-setting terminal title.
 # DISABLE_AUTO_TITLE="true"
 
-# Uncomment following line if you want red dots to be displayed while waiting for completion
-COMPLETION_WAITING_DOTS="true"
+# Uncomment the following line to enable command auto-correction.
+# ENABLE_CORRECTION="true"
 
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
+# Uncomment the following line to display red dots whilst waiting for completion.
+# You can also set it to another string to have that shown instead of the default red dots.
+# e.g. COMPLETION_WAITING_DOTS="%F{yellow}waiting...%f"
+# Caution: this setting can cause issues with multiline prompts in zsh < 5.7.1 (see #5765)
+# COMPLETION_WAITING_DOTS="true"
+
+# Uncomment the following line if you want to disable marking untracked files
+# under VCS as dirty. This makes repository status check for large repositories
+# much, much faster.
+# DISABLE_UNTRACKED_FILES_DIRTY="true"
+
+# Uncomment the following line if you want to change the command execution time
+# stamp shown in the history command output.
+# You can set one of the optional three formats:
+# "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
+# or set a custom format using the strftime function format specifications,
+# see 'man strftime' for details.
+# HIST_STAMPS="mm/dd/yyyy"
+
+# Would you like to use another custom folder than $ZSH/custom?
+# ZSH_CUSTOM=/path/to/new-custom-folder
+
+# Which plugins would you like to load?
+# Standard plugins can be found in $ZSH/plugins/
+# Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
+# Add wisely, as too many plugins slow down shell startup.
 plugins=(
   git
-  pipenv
-  mercurial
   repo
   python
   brew
@@ -44,48 +84,75 @@ plugins=(
   jsontools
   docker
   vi-mode
-  osx
+  zsh-fzf-history-search
+  macos
   urltools
   web-search
-  git
-  zsh-syntax-highlightning
   zsh-autosuggestions
 )
 
-[[ -d $HOME/.oh-my-zsh ]] && ZSH=$HOME/.oh-my-zsh
-[[ -d /usr/share/oh-my-zsh ]] && ZSH=/usr/share/oh-my-zsh
+include() { [[ -f "$1" ]] && source "$1" }
 
-include $HOME/.oh-my-zsh/oh-my-zsh.sh
-include /usr/share/oh-my-zsh/oh-my-zsh.sh
-include ~/.shell_prompt.sh
+include $ZSH/oh-my-zsh.sh
+
+# User configuration
+
+# export MANPATH="/usr/local/man:$MANPATH"
+
+# You may need to manually set your language environment
+# export LANG=en_US.UTF-8
+
+# Preferred editor for local and remote sessions
+# if [[ -n $SSH_CONNECTION ]]; then
+#   export EDITOR='vim'
+# else
+#   export EDITOR='mvim'
+# fi
+
+# Compilation flags
+# export ARCHFLAGS="-arch x86_64"
+
+# Set personal aliases, overriding those provided by oh-my-zsh libs,
+# plugins, and themes. Aliases can be placed here, though oh-my-zsh
+# users are encouraged to define aliases within the ZSH_CUSTOM folder.
+# For a full list of active aliases, run `alias`.
+#
+# Example aliases
+# alias zshconfig="mate ~/.zshrc"
+# alias ohmyzsh="mate ~/.oh-my-zsh"
+
+
+#include ~/.shell_prompt.sh
 
 # Customize to your needs...
 
-export PATH=$HOME/.local/bin:$PATH
-export CODE=/Users/qr4/code
+export PATH=$HOME/.local/bin:$PATH export CODE=~/code
 
 # mac python bug
-export DYLD_FORCE_FLAT_NAMESPACE=1
-export HOST_IP_ADDRESS=127.0.0.1
+export DYLD_FORCE_FLAT_NAMESPACE=1 export HOST_IP_ADDRESS=127.0.0.1
 
 # Announce 256 bit color support
-export TERM=xterm-256color
-#[ -n "$TMUX" ] && export TERM=screen-256color
+export TERM=xterm-256color #[ -n "$TMUX" ] && export TERM=screen-256color
 
 # Set correct locales
-export LC_ALL=en_US.UTF-8
-export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8 export LANG=en_US.UTF-8
 
 # Set the GIT_EDITOR
-export GIT_EDITOR=vim
+export GIT_EDITOR=nvim
+
+export GRADLE_USER_HOME=$HOME/.gradle
 
 # Good old netcat
 alias nc=netcat
 
+alias mkdir=mkdir -p
+
+alias python=python3
+
 alias ls=exa
 alias l='exa --header --long --group --accessed --modified --created -lah'
 alias ll='exa --header --long --group --accessed --modified --created -ah'
-alias lt='exa --tree --level=2 --long'
+alias lt='exa --tree --level=3 --long'
 
 # Less gdb output
 alias gdb='gdb -q'
@@ -95,7 +162,7 @@ alias g++='g++ --std=c++14'
 alias clang++='clang++ --std=c++14'
 
 # neovim rulez
-#alias vim=nvim
+alias vim=nvim
 
 alias e='emacsclient -t'
 alias ev='emacsclient -nc'
@@ -104,11 +171,13 @@ alias clearcache='sudo paccache -r -k 1; sudo paccache -r -u -k 0'
 
 alias git-cola='env PYTHONPATH= git-cola'
 
+alias tx='tmuxinator'
+
 # Easy access to a z3 environment (OS X only)
 alias z3py='PYTHONPATH=/usr/local/Cellar/z3/4.4.0/lib/python2.7/dist-packages/ ipython2'
 
-alias gprr='git submodule update --init --recursive --rebase --remote && git pull -r'
-alias gpr='git pull -r'
+#alias gprr='git submodule update --init --recursive --rebase --remote && git pull -r'
+alias gpr='git pull -r --autostash'
 alias gl="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 alias gp='git push origin HEAD:refs/for/master'
 alias gpl='git push origin HEAD:refs/for/master | tee /dev/stderr |  grep -o "https:.*" | cut -d" " -f1 | pbcopy'
@@ -143,6 +212,16 @@ unzlib() {
     # add gzip magic and pipe to gunzip
     printf "\x1f\x8b\x08\x00\x00\x00\x00\x00" | cat - $file | gzip -dcq
   done
+}
+gppr() {
+  git stash --all
+  git checkout -b xxxxxx
+  git reset --hard origin/master
+  git cherry-pick master
+  git push origin HEAD:$1 --force
+  git checkout master
+  git branch -D xxxxxx
+  git stash pop
 }
 
 #
@@ -279,20 +358,104 @@ o() {
 }
 
 p() {
-#    DIR=$(sh -c "find $CODE -maxdepth 3 -type d" | fzy -l 30)
     DIR=$(sh -c "find $CODE -maxdepth 3 -type d" | fzf)
+#    DIR=$(sh -c "find $CODE -maxdepth 3 -type d" | sk)
     if [ ! -z "$DIR" ]; then
       cd "$DIR"
     fi
 }
 
+g1ep() {
+  read x
+  echo "$x"
+  rg $@
+}
+
+REPEAT() {
+  delay=$1
+  shift
+  while true;
+  do
+    date
+    echo "Executing: $@"
+    eval $@
+    echo -e '\n\n'
+    echo sleeping for $delay seconds...
+    sleep $delay || return
+  done
+}
+
+andCount() {
+  x=$(mktemp)
+  tee "$x"
+  echo -n "number of lines: "
+  wc -l < "$x"
+}
+
+watcher() {
+  dir = $1
+  shift
+  while true;
+  do
+    watch -d -t -g "ls -lR ${dir} | sha1sum" && `eval $@`;
+  done;
+}
+
+open_ports() {
+  netstat -Watnlv | grep LISTEN | awk '{"ps -o comm= -p " $9 | getline procname;colred="\033[01;31m";colclr="\033[0m"; print cred "proto: " colclr $1 colred " | addr.port: " colclr $4 colred " | pid: " colclr $9 colred " | name: " colclr procname;  }' | column -t -s "|"
+}
+
+SKIM_CTRL_T_COMMAND='rg --files --no-ignore --glob "!.git/*"'
+
+export GOPATH="$HOME/go"
+export PATH="$HOME/.config/emacs/bin:$PATH"
+export PATH="/opt/homebrew/bin:$PATH"
+export PATH="/usr/local/Cellar/golangci-lint/1.27.0/bin/:$PATH"
+export PATH="$GOPATH/bin:$PATH"
 export PATH="$HOME/.yarn/bin:$PATH"
 export PATH="/usr/local/sbin:$PATH"
+export PATH="$HOME/bin/:$PATH"
+export PATH="/usr/local/opt/grep/libexec/gnubin:$PATH"
+export PATH="$PATH":"$HOME/.pub-cache/bin"
+export PATH="$HOME/code/vw/flutter/bin:$PATH"
+export PATH="$HOME/code/privat/rust-analyzer:$PATH"
+export PATH="$HOME/.asdf/shims:$PATH"
+export PATH="/Applications/Emacs.app/Contents/MacOS/bin:$PATH"
+export PATH="$HOME/.asdf/installs/nodejs/16.13.0/bin:$PATH"
+export PATH="/usr/local/opt/ffmpeg@2.8/bin:$PATH"
+export PATH="/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/bin/:$PATH"
+export PATH="/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/bin/:$PATH"
+export KAFKA_REPO="$HOME/code/peek_cloppenburg/confluent-kafka-topology"
+export EDITOR="nvim"
 
 
-include ~/zsh_private
+export CLOUDSDK_PYTHON=
+export GOOGLE_APPLICATION_CREDENTIALS=
+
+export GOARCH=amd64
+export CGO_ENABLED=1
+export JAVA_HOME=$HOME/.local/share/rtx/installs/java/openjdk-18
+
+include ~/.zshrc_private
 include /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 include /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 include /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 
+fortune | cowsay | lolcat
 #zprof
+
+export PNPM_HOME="~/Library/pnpm"
+export PATH="$PNPM_HOME:$PATH"
+export DYLD_LIBRARY_PATH=/Users/vitalihenne/code/privat/dungeons_and_diagrams/dist/lib
+export PMIP_CBC_LIBRARY=/Users/vitalihenne/code/privat/dungeons_and_diagrams/dist/lib/libCbc.dylib
+
+# emacs lsp
+#export LSP_USE_PLISTS=true
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
+[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+
+eval "$(direnv hook zsh)"
+eval "$(ssh-agent)" 
+[ -s "/opt/homebrew/bin/rtx" ] && eval "$(/opt/homebrew/bin/rtx activate zsh)"

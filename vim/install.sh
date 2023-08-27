@@ -8,5 +8,5 @@ cd bundle/powerline-fonts
 
 cd $DIR
 
-cd bundle/YouCompleteMe
-./install.sh --clang-completer
+#cd bundle/YouCompleteMe
+#./install.sh --clang-completer
