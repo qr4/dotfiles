@@ -11,12 +11,14 @@
 - shell:
   - git -C ~/.config/emacs pull || git clone --depth 1 https://github.com/doomemacs/doomemacs ~/.config/emacs
   - git -C ~/.tmux/plugins/tpm pull || git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+  - git -C ~/.config/nvim pull || git clone https://github.com/AstroNvim/AstroNvim ~/.config/nvim
 
 - link:
     ~/.tmux:
     ~/.tmux.conf:
       #    ~/.config/nvim: nvim
-    ~/.config/nvim/lua/plugins/: nvim
+    ~/.config/nvim/lua/plugins/flash.lua: nvim/flash.lua
+    ~/.config/nvim/lua/plugins/copilot.lua: nvim/copilot.lua
     ~/.vim: vim
     ~/.vimrc:
     ~/.vimrc:
@@ -28,9 +30,8 @@
     ~/.config/doom/packages.el: emacs/packages.el
 
 - shell:
-  - ~/.config/emacs/bin/doom install
+  - ~/.config/emacs/bin/doom install -!
   - ~/.config/emacs/bin/doom sync
-  - git -C ~/.config/nvim pull || git clone https://github.com/AstroNvim/AstroNvim ~/.config/nvim
     #  - ~/.vim/install.sh
   - ~/.tmux/plugins/tpm/bin/install_plugins
   - git -C ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions pull || git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
