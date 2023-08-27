@@ -15,7 +15,8 @@
 - link:
     ~/.tmux:
     ~/.tmux.conf:
-    ~/.config/nvim: nvim
+      #    ~/.config/nvim: nvim
+    ~/.config/nvim/lua/plugins/: nvim
     ~/.vim: vim
     ~/.vimrc:
     ~/.vimrc:
@@ -29,6 +30,7 @@
 - shell:
   - ~/.config/emacs/bin/doom install
   - ~/.config/emacs/bin/doom sync
+  - git -C ~/.config/nvim pull || git clone https://github.com/AstroNvim/AstroNvim ~/.config/nvim
     #  - ~/.vim/install.sh
   - ~/.tmux/plugins/tpm/bin/install_plugins
   - git -C ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions pull || git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
