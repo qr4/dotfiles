@@ -214,14 +214,28 @@ unzlib() {
   done
 }
 gppr() {
+  set -ux
+  CUR_BRANCH=`git rev-parse --abbrev-ref HEAD`
+  REMOTE_MAIN_BRANCH=`git symbolic-ref refs/remotes/origin/HEAD --short`
+
   git stash --all
+  git branch -D xxxxxx || true
   git checkout -b xxxxxx
-  git reset --hard origin/master
-  git cherry-pick master
+  git reset --hard $REMOTE_MAIN_BRANCH
+  git cherry-pick $CUR_BRANCH
   git push origin HEAD:$1 --force
-  git checkout master
+  git checkout $CUR_BRANCH
   git branch -D xxxxxx
   git stash pop
+}
+
+#
+# Decode jwt
+#
+# usage: jwt_decode <JWT>
+#
+jwt_decode() {
+  jq -R 'split(".") | .[1] | @base64d | fromjson' <<< "$1"
 }
 
 #
@@ -356,6 +370,31 @@ transfer() {
 o() {
   [[ -z $1 ]] && open . || open $*
 }
+
+init_worktree() {
+  set -x
+  if [ $# -eq 0 ]; then
+    echo "No arguments specified. Usage:\ntinit_worktree <REMOTE_URL>"
+    return 1
+  fi
+
+  take $1;
+  git checkout -b worktree_root
+  git rm -rf ./
+  git commit -m"init"
+}
+
+worktree_add_existing() {
+  git worktree add --track -b $1 $1 origin/$1 && cd $1
+}
+
+worktree_add_new() {
+  if [ `git rev-parse --verify origin/master 2> /dev/null` ]; then
+    git worktree add --track -b $1 $1 origin/master && cd $1
+  else
+    git worktree add --track -b $1 $1 origin/main && cd $1
+  fi
+} 
 
 p() {
     DIR=$(sh -c "find $CODE -maxdepth 3 -type d" | fzf)
